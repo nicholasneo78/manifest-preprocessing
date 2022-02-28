@@ -1,0 +1,8 @@
+*.tsv
+*.flac
+*.tar.gz
+*.WAV
+*.wav
+*.txt
+.ipynb_checkpoints
+/librispeech_data/
