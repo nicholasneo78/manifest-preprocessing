@@ -1,0 +1,16 @@
+soundfile==0.10.3.post1
+librosa==0.8.1
+numpy
+ffmpeg
+audiosegment
+logmmse==1.5
+pydub==0.24.1
+git+https://github.com/amsehili/auditok
+split-folders
+tqdm
+pandas
+wave
+praatio
+pyyaml
+clearml
+boto3
