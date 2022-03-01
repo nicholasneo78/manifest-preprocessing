@@ -7,7 +7,7 @@ OUTPUT_URL = "s3://experiment-logging/storage"
 
 task = Task.init(project_name=PROJECT_NAME, task_name=TASK_NAME)
 task.set_base_docker(
-    docker_images="python:3.8.12-slim-buster",
+    docker_image="python:3.8.12-slim-buster",
     docker_setup_bash_script=[
         'apt-get update', 'apt-get upgrade -y', 'apt-get install -y'
         'apt-get -y install apt-utils gcc libpq-dev libsndfile1 ffmpeg',
@@ -17,13 +17,13 @@ task.set_base_docker(
 
 # librispeech_small dataset_task_id: 092896c34c0e45b598777222d9eaaee6
 args = {
-    'dataset_task_id': '',
+    'dataset_task_id': '092896c34c0e45b598777222d9eaaee6',
     'manifest_filename': 'manifest.json',
     'got_annotation': True,
 }
 
 task.connect(args)
-task.execute_remotely()
+task.execute_remotely(queue_name='compute', exit_process=True)
 
 from preprocessing.librispeech_data_manifest import LibrispeechManifest
 
