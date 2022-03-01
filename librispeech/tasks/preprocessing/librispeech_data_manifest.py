@@ -17,7 +17,7 @@ class LibrispeechManifest():
     
     # check if the json file name already existed (if existed, need to throw error or else the new json manifest will be appended to the old one, hence causing a file corruption)
     def json_existence(self):
-        assert not os.path.isfile(f'{self.root_folder}{self.manifest_filename}.json'), "json filename exists! Please remove old json file!"
+        assert not os.path.isfile(f'{self.root_folder}{self.manifest_filename}'), "json filename exists! Please remove old json file!"
     
     # helper function to build the lookup table for the id and annotations from all the text files and return the table
     def build_lookup_table(self):
@@ -70,7 +70,7 @@ class LibrispeechManifest():
                                }
 
                     # write to json file
-                    with open(f'{self.root_folder}{self.manifest_filename}.json', 'a+', encoding='utf-8') as f:
+                    with open(f'{self.root_folder}{self.manifest_filename}', 'a+', encoding='utf-8') as f:
                         f.write(json.dumps(data) + '\n')
                         # json.dump(data, f, ensure_ascii=False, indent=2)
                         # f.write('\n')
@@ -78,19 +78,20 @@ class LibrispeechManifest():
 if __name__ == '__main__':
     # DEFINING CONSTANTS FOR THE FILE NAMING
     ROOT_FOLDER = './librispeech_data/'
-    MANIFEST_FILENAME = 'manifest'
-    MANIFEST_FILENAME_NO_LABEL = 'manifest_no_annotation'
-    GOT_ANNOTATION = [True, False]
+    MANIFEST_FILENAME = 'manifest.json'
+    MANIFEST_FILENAME_NO_LABEL = 'manifest_no_annotation.json'
+    GOT_ANNOTATION = True
 
     # instantiate LibrispeechManifest class object
     # with annotation
-    get_libri_manifest = LibrispeechManifest(root_folder=ROOT_FOLDER, manifest_filename=MANIFEST_FILENAME, got_annotation=GOT_ANNOTATION[0])
+    get_libri_manifest = LibrispeechManifest(root_folder=ROOT_FOLDER, manifest_filename=MANIFEST_FILENAME, got_annotation=GOT_ANNOTATION)
+    
     # without annotation
-    get_libri_manifest_no_label = LibrispeechManifest(root_folder=ROOT_FOLDER, manifest_filename=MANIFEST_FILENAME_NO_LABEL, got_annotation=GOT_ANNOTATION[1])
+    #get_libri_manifest_no_label = LibrispeechManifest(root_folder=ROOT_FOLDER, manifest_filename=MANIFEST_FILENAME_NO_LABEL, got_annotation=GOT_ANNOTATION)
 
     # call the class method to produce the json manifest file
     get_libri_manifest.create_json_manifest()
-    get_libri_manifest_no_label.create_json_manifest()
+    #get_libri_manifest_no_label.create_json_manifest()
 
     print('json manifest file created!')
 
