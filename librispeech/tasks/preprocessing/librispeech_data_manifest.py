@@ -73,6 +73,8 @@ class LibrispeechManifest():
                         f.write(json.dumps(data) + '\n')
                         # json.dump(data, f, ensure_ascii=False, indent=2)
                         # f.write('\n')
+                        
+        return f'{self.root_folder}{self.manifest_filename}'
 
     def __call__(self):
         return self.create_json_manifest()
