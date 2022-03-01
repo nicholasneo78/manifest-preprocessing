@@ -10,7 +10,7 @@ task.set_base_docker(
     docker_image="python:3.8.12-slim-buster",
     docker_setup_bash_script=[
         'apt-get update', 'apt-get upgrade -y', 'apt-get install -y'
-        'apt-get -y install apt-utils gcc libpq-dev ffmpeg python3-pandas',
+        'apt-get -y install pandas apt-utils gcc libpq-dev ffmpeg python3-pandas',
         'apt install libsndfile1'
         'python3 -m pip install librosa numpy==1.21.0'
     ]
