@@ -1,7 +1,6 @@
 # imports
 import os
 from os.path import join
-from tqdm import tqdm
 import numpy as np
 import pandas as pd
 import json
