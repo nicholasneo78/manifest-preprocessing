@@ -23,10 +23,10 @@ args = {
 }
 task.connect(args)
 
-# save it in draft first
-task.execute_remotely()
+# EITHER save it in draft first
+#task.execute_remotely()
 
-# set to run
+# Or set to run
 task.execute_remotely(queue_name='compute', exit_process=True)
 
 from preprocessing.librispeech_data_manifest import LibrispeechManifest
