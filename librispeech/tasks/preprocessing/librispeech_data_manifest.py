@@ -73,7 +73,7 @@ class LibrispeechManifest():
                         f.write(json.dumps(data) + '\n')
                         # json.dump(data, f, ensure_ascii=False, indent=2)
                         # f.write('\n')
-                        
+
         return f'{self.root_folder}{self.manifest_filename}'
 
     def __call__(self):
@@ -82,7 +82,7 @@ class LibrispeechManifest():
 if __name__ == '__main__':
     # DEFINING CONSTANTS FOR THE FILE NAMING
     ROOT_FOLDER = './librispeech_data/'
-    MANIFEST_FILENAME = 'manifest.json'
+    MANIFEST_FILENAME = 'manifest2.json'
     MANIFEST_FILENAME_NO_LABEL = 'manifest_no_annotation.json'
     GOT_ANNOTATION = True
 
