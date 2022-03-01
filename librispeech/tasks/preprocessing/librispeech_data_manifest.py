@@ -7,12 +7,6 @@ import pandas as pd
 import json
 import librosa
 
-# DEFINING CONSTANTS FOR THE FILE NAMING
-ROOT_FOLDER = './librispeech_data/'
-MANIFEST_FILENAME = 'manifest'
-MANIFEST_FILENAME_NO_LABEL = 'manifest_no_annotation'
-GOT_ANNOTATION = [True, False]
-
 # build a class to produce the librispeech data manifest
 class LibrispeechManifest():
     
@@ -82,8 +76,13 @@ class LibrispeechManifest():
                         # f.write('\n')
 
 if __name__ == '__main__':
-    # instantiate LibrispeechManifest class object
+    # DEFINING CONSTANTS FOR THE FILE NAMING
+    ROOT_FOLDER = './librispeech_data/'
+    MANIFEST_FILENAME = 'manifest'
+    MANIFEST_FILENAME_NO_LABEL = 'manifest_no_annotation'
+    GOT_ANNOTATION = [True, False]
 
+    # instantiate LibrispeechManifest class object
     # with annotation
     get_libri_manifest = LibrispeechManifest(root_folder=ROOT_FOLDER, manifest_filename=MANIFEST_FILENAME, got_annotation=GOT_ANNOTATION[0])
     # without annotation
