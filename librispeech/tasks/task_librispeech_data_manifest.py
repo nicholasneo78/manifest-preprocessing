@@ -18,6 +18,8 @@ task.set_base_docker(
 # librispeech_small dataset_task_id: 092896c34c0e45b598777222d9eaaee6
 args = {
     'dataset_task_id': '',
+    'manifest_filename': 'manifest.json',
+    'got_annotation': True,
 }
 
 task.connect(args)
@@ -30,3 +32,18 @@ dataset = Dataset.get(dataset_id=args['dataset_task_id'])
 dataset_path = dataset.get_local_copy()
 
 # process
+new_dataset_path = LibrispeechManifest(
+    root_folder=dataset_path, 
+    manifest_filename=args['manifest_filename'], 
+    got_annotation=args['got_annotation'])
+
+# register ClearML Dataset
+dataset = Dataset.create(
+    dataset_project=PROJECT_NAME, dataset_name=DATASET_NAME
+)
+
+dataset.add_files(new_dataset_path)
+dataset.upload(output_url=OUTPUT_URL)
+dataset.finalize()
+
+print('Done')
