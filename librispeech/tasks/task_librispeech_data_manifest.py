@@ -44,14 +44,16 @@ librispeech_manifest = LibrispeechManifest(
     got_annotation=args['got_annotation']
 )
 
-new_dataset_path = librispeech_manifest()
+#new_dataset_path = librispeech_manifest()
+librispeech_manifest()
+
 
 # register ClearML Dataset
 dataset = Dataset.create(
     dataset_project=PROJECT_NAME, dataset_name=DATASET_NAME
 )
 
-dataset.add_files(new_dataset_path)
+#dataset.add_files(new_dataset_path)
 dataset.upload(output_url=OUTPUT_URL)
 dataset.finalize()
 
