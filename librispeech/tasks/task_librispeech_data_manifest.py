@@ -11,7 +11,7 @@ task.set_base_docker(
     docker_setup_bash_script=[
         'apt-get update', 'apt-get upgrade -y', 'apt-get install -y'
         'apt-get -y install apt-utils gcc libpq-dev libsndfile1 ffmpeg',
-        'python3 -m pip install librosa numpy pandas'
+        'python3 -m pip install librosa numpy==1.21.0 pandas'
     ]
 )
 
