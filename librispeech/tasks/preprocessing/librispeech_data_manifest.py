@@ -74,6 +74,9 @@ class LibrispeechManifest():
                         # json.dump(data, f, ensure_ascii=False, indent=2)
                         # f.write('\n')
 
+    def __call__(self):
+        return self.create_json_manifest()
+
 if __name__ == '__main__':
     # DEFINING CONSTANTS FOR THE FILE NAMING
     ROOT_FOLDER = './librispeech_data/'
@@ -89,8 +92,11 @@ if __name__ == '__main__':
     #get_libri_manifest_no_label = LibrispeechManifest(root_folder=ROOT_FOLDER, manifest_filename=MANIFEST_FILENAME_NO_LABEL, got_annotation=GOT_ANNOTATION)
 
     # call the class method to produce the json manifest file
-    get_libri_manifest.create_json_manifest()
+    #get_libri_manifest.create_json_manifest()
     #get_libri_manifest_no_label.create_json_manifest()
+
+    # making use of the __call__ method
+    get_libri_manifest()
 
     print('json manifest file created!')
 

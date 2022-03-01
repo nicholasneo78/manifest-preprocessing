@@ -11,9 +11,9 @@ task.set_base_docker(
     docker_setup_bash_script=[
         'apt-get update', 'apt-get upgrade -y', 'apt-get install -y'
         'apt-get -y install apt-utils gcc libpq-dev ffmpeg python3-pandas',
-        'apt install libsndfile1',
+        'apt-get -y install libsndfile1',
         'apt-get -y install python3-pandas',
-        'python3 -m pip install librosa numpy==1.21.0'
+        'python3 -m pip install pandas librosa numpy==1.21.0'
     ]
 )
 
@@ -38,10 +38,13 @@ dataset = Dataset.get(dataset_id=args['dataset_task_id'])
 dataset_path = dataset.get_local_copy()
 
 # process
-new_dataset_path = LibrispeechManifest(
+librispeech_manifest = LibrispeechManifest(
     root_folder=dataset_path, 
     manifest_filename=args['manifest_filename'], 
-    got_annotation=args['got_annotation'])
+    got_annotation=args['got_annotation']
+)
+
+new_dataset_path = librispeech_manifest()
 
 # register ClearML Dataset
 dataset = Dataset.create(
