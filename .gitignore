@@ -4,5 +4,5 @@
 *.WAV
 *.wav
 *.txt
-.ipynb_checkpoints
-/librispeech_data/
+/librispeech/.ipynb_checkpoints
+/librispeech/librispeech_data/
