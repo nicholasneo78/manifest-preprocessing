@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import json
 import librosa
+from pathlib import Path
 
 # build a class to produce the librispeech data manifest
 class LibrispeechManifest():
@@ -52,7 +53,7 @@ class LibrispeechManifest():
         for root, subdirs, files in os.walk(self.root_folder):
             
             # since self.root_folder is a subset of the root, can just replace self.root with empty string
-            modified_root = root.replace(self.root_folder, '')
+            modified_root = root.replace(str(Path(self.root_folder)), '')
 
             for file in files:
                 if file.endswith(".flac"):

@@ -14,7 +14,7 @@ task.set_base_docker(
         'apt-get -y install apt-utils gcc libpq-dev ffmpeg python3-pandas',
         'apt-get -y install libsndfile1',
         'apt-get -y install python3-pandas',
-        'python3 -m pip install pandas librosa numpy==1.21.0'
+        'python3 -m pip install pandas librosa numpy==1.21.0 pathlib'
     ]
 )
 
