@@ -4,6 +4,7 @@ PROJECT_NAME = "audio_preproc_test"
 TASK_NAME = "librispeech_manifest_generation"
 DATASET_NAME = "librispeech"
 OUTPUT_URL = "s3://experiment-logging/storage"
+DATASET_PROJECT = 'datasets/librispeech'
 
 task = Task.init(project_name=PROJECT_NAME, task_name=TASK_NAME)
 task.set_base_docker(
@@ -20,8 +21,8 @@ task.set_base_docker(
 # librispeech_small dataset_task_id: 092896c34c0e45b598777222d9eaaee6
 args = {
     'dataset_task_id': '159b42223f4c46f89564ef51b251b2d2',
-    'manifest_filename': 'manifest_on_clearml_1.json',
-    'got_annotation': True,
+    'manifest_filename': 'manifest.json',
+    'got_annotation': False,
 }
 task.connect(args)
 
@@ -35,7 +36,7 @@ from preprocessing.librispeech_data_manifest import LibrispeechManifest
 
 # register ClearML Dataset
 dataset = Dataset.create(
-    dataset_project=PROJECT_NAME, dataset_name=DATASET_NAME, parent_datasets=[args['dataset_task_id'],]
+    dataset_project=DATASET_PROJECT, dataset_name=DATASET_NAME, parent_datasets=[args['dataset_task_id'],]
 )
 
 # import dataset
