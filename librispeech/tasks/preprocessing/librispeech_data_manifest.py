@@ -53,7 +53,9 @@ class LibrispeechManifest():
         for root, subdirs, files in os.walk(self.root_folder):
             
             # since self.root_folder is a subset of the root, can just replace self.root with empty string
-            modified_root = str(Path(root)).replace(str(Path(self.root_folder)), '')
+            modified_root_ = str(Path(root)).replace(str(Path(self.root_folder)), '')
+            # replace the slash with empty string after Path standardization
+            modified_root = modified_root_.replace('/', '', 1)
 
             for file in files:
                 if file.endswith(".flac"):
