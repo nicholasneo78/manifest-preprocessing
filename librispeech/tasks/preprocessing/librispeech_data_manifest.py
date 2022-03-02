@@ -50,6 +50,10 @@ class LibrispeechManifest():
 
         # retrieve the dataframe lookup table
         for root, subdirs, files in os.walk(self.root_folder):
+            
+            # since self.root_folder is a subset of the root, can just replace self.root with empty string
+            modified_root = root.replace(self.root_folder, '')
+
             for file in files:
                 if file.endswith(".flac"):
                     # retrieve the base path for the particular audio file
@@ -58,13 +62,13 @@ class LibrispeechManifest():
                     # create the dictionary that is to be appended to the json file
                     if self.got_annotation:
                         data = {
-                                'audio_filepath' : file, #os.path.join(root, file),
+                                'audio_filepath' : os.path.join(modified_root, file),
                                 'duration' : librosa.get_duration(filename=os.path.join(root, file)),
                                 'text' : df_new.loc[df_new['id'] == base_path, 'annotations'].to_numpy()[0]
                                }
                     else:
                         data = {
-                                'audio_filepath' : file, #os.path.join(root, file),
+                                'audio_filepath' : os.path.join(modified_root, file),
                                 'duration' : librosa.get_duration(filename=os.path.join(root, file)),
                                }
 

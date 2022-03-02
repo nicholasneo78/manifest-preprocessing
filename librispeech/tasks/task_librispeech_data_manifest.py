@@ -6,7 +6,7 @@ DATASET_NAME = "librispeech"
 OUTPUT_URL = "s3://experiment-logging/storage"
 DATASET_PROJECT = 'datasets/librispeech'
 
-task = Task.init(project_name=PROJECT_NAME, task_name=TASK_NAME)
+task = Task.init(project_name=PROJECT_NAME, task_name=TASK_NAME, output_uri=OUTPUT_URL)
 task.set_base_docker(
     docker_image="python:3.8.12-slim-buster",
     docker_setup_bash_script=[
@@ -30,7 +30,7 @@ task.connect(args)
 #task.execute_remotely()
 
 # Or set to run
-task.execute_remotely(queue_name='cpu-only', exit_process=True)
+task.execute_remotely(queue_name='services', exit_process=True)
 
 from preprocessing.librispeech_data_manifest import LibrispeechManifest
 
