@@ -22,7 +22,7 @@ task.set_base_docker(
 args = {
     'dataset_task_id': '159b42223f4c46f89564ef51b251b2d2',
     'manifest_filename': 'manifest.json',
-    'got_annotation': False,
+    'got_annotation': True,
 }
 task.connect(args)
 
