@@ -58,13 +58,13 @@ class LibrispeechManifest():
                     # create the dictionary that is to be appended to the json file
                     if self.got_annotation:
                         data = {
-                                'audio_filepath' : os.path.join(root, file),
+                                'audio_filepath' : file, #os.path.join(root, file),
                                 'duration' : librosa.get_duration(filename=os.path.join(root, file)),
                                 'text' : df_new.loc[df_new['id'] == base_path, 'annotations'].to_numpy()[0]
                                }
                     else:
                         data = {
-                                'audio_filepath' : os.path.join(root, file),
+                                'audio_filepath' : file, #os.path.join(root, file),
                                 'duration' : librosa.get_duration(filename=os.path.join(root, file)),
                                }
 
