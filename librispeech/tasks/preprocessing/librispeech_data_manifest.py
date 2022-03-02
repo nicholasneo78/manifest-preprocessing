@@ -69,6 +69,11 @@ class LibrispeechManifest():
                                }
 
                     # write to json file
+
+                    # local copy
+                    #with open(f'{self.root_folder}{self.manifest_filename}', 'a+', encoding='utf-8') as f:
+                    
+                    # on clearml
                     with open(f'{self.manifest_filename}', 'a+', encoding='utf-8') as f:
                         f.write(json.dumps(data) + '\n')
                         # json.dump(data, f, ensure_ascii=False, indent=2)
@@ -80,7 +85,7 @@ class LibrispeechManifest():
         return self.create_json_manifest()
 
 if __name__ == '__main__':
-    # DEFINING CONSTANTS FOR THE FILE NAMING
+    # LOCAL COPY - DEFINING CONSTANTS FOR THE FILE NAMING 
     ROOT_FOLDER = './librispeech_data/'
     MANIFEST_FILENAME = 'manifest.json'
     MANIFEST_FILENAME_NO_LABEL = 'manifest_no_annotation.json'
