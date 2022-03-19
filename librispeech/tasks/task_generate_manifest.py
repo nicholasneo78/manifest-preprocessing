@@ -32,7 +32,7 @@ task.connect(args)
 # Or set to run
 task.execute_remotely(queue_name='services', exit_process=True)
 
-from preprocessing.librispeech_data_manifest import LibrispeechManifest
+from preprocessing.generate_manifest import GenerateManifest
 
 # register ClearML Dataset
 dataset = Dataset.create(
@@ -46,7 +46,7 @@ dataset = Dataset.create(
 dataset_path = dataset.get_local_copy()
 
 # process
-librispeech_manifest = LibrispeechManifest(
+librispeech_manifest = GenerateManifest(
     root_folder=dataset_path, 
     manifest_filename=args['manifest_filename'], 
     got_annotation=args['got_annotation']
