@@ -6,6 +6,7 @@ import pandas as pd
 import json
 import librosa
 from pathlib import Path
+import yaml
 
 # build a class to produce the librispeech data manifest
 class GenerateManifest():
@@ -88,25 +89,17 @@ class GenerateManifest():
         return self.create_json_manifest()
 
 if __name__ == '__main__':
-    # LOCAL COPY - DEFINING CONSTANTS FOR THE FILE NAMING 
-    ROOT_FOLDER = './librispeech_data/'
-    MANIFEST_FILENAME = 'manifest.json'
-    MANIFEST_FILENAME_NO_LABEL = 'manifest_no_annotation.json'
-    GOT_ANNOTATION = True
+
+    # the directory to the config file with the dataset info that needs to generate the manifest
+    CONFIG_FILE = './config/config_librispeech.yaml'
+
+
+    with open(CONFIG_FILE) as f:
+        config = yaml.safe_load(f)
 
     # instantiate GenerateManifest class object
-    # with annotation
-    get_manifest = GenerateManifest(root_folder=ROOT_FOLDER, manifest_filename=MANIFEST_FILENAME, got_annotation=GOT_ANNOTATION)
-    
-    # without annotation
-    #get_libri_manifest_no_label = GenerateManifest(root_folder=ROOT_FOLDER, manifest_filename=MANIFEST_FILENAME_NO_LABEL, got_annotation=GOT_ANNOTATION)
-
-    # call the class method to produce the json manifest file
-    #get_libri_manifest.create_json_manifest()
-    #get_libri_manifest_no_label.create_json_manifest()
-
-    # making use of the __call__ method
+    get_manifest = GenerateManifest(root_folder=config['dataset_folder'], manifest_filename=config['manifest_filename'], got_annotation=config['got_annotation'])
     get_manifest()
 
     print('json manifest file created!')
-
+    
