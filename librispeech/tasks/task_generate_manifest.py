@@ -1,10 +1,23 @@
 from clearml import Task, Dataset
+import yaml
 
-PROJECT_NAME = "audio_preproc_test"
-TASK_NAME = "librispeech_manifest_generation"
-DATASET_NAME = "librispeech"
-OUTPUT_URL = "s3://experiment-logging/storage"
-DATASET_PROJECT = 'datasets/librispeech'
+# get task configs - ONLY THING NEEDED TO CHANGE
+CONFIG_FILE = './config/config_task_librispeech.yaml'
+
+with open(CONFIG_FILE) as f:
+    config = yaml.safe_load(f)
+
+# PROJECT_NAME = "audio_preproc_test"
+# TASK_NAME = "librispeech_manifest_generation"
+# DATASET_NAME = "librispeech"
+# OUTPUT_URL = "s3://experiment-logging/storage"
+# DATASET_PROJECT = "datasets/librispeech"
+
+PROJECT_NAME = config['project_name']
+TASK_NAME = config['task_name']
+DATASET_NAME = config['dataset_name']
+OUTPUT_URL = config['output_url']
+DATASET_PROJECT = config['dataset_project']
 
 task = Task.init(project_name=PROJECT_NAME, task_name=TASK_NAME, output_uri=OUTPUT_URL)
 task.set_base_docker(
@@ -20,9 +33,9 @@ task.set_base_docker(
 
 # librispeech_small dataset_task_id: 092896c34c0e45b598777222d9eaaee6
 args = {
-    'dataset_task_id': '159b42223f4c46f89564ef51b251b2d2',
-    'manifest_filename': 'manifest.json',
-    'got_annotation': True,
+    'dataset_task_id': config['dataset_task_id'],
+    'manifest_filename': config['manifest_filename'],
+    'got_annotation': config['got_annotation'],
 }
 task.connect(args)
 
@@ -32,7 +45,7 @@ task.connect(args)
 # Or set to run
 task.execute_remotely(queue_name='services', exit_process=True)
 
-from preprocessing.generate_manifest import GenerateManifest
+from preprocessing.generate_manifest import CONFIG_FILE, GenerateManifest
 
 # register ClearML Dataset
 dataset = Dataset.create(
