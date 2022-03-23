@@ -2,13 +2,13 @@
 
 # task initialisation
 project_name: 'audio_preproc_test'
-task_name: 'librispeech_manifest_generation'
-dataset_name: 'librispeech'
-output_url: 's3://experiment-logging/' #storage'
-dataset_project: 'datasets/librispeech'
+task_name: 'jtubespeech_small_manifest_generation'
+dataset_name: 'jtubespeech_small'
+output_url: 's3://experiment-logging/storage'
+dataset_project: 'datasets/jtubespeech'
 
 # arguments corresponding to the generate_manifest.py
-dataset_task_id: '159b42223f4c46f89564ef51b251b2d2'
+dataset_task_id: '0fa205ad8cd2487aaebadd00e9d01667'
 manifest_filename: 'manifest.json'
 got_annotation: True
 

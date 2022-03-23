@@ -2,7 +2,8 @@ from clearml import Task, Dataset
 import yaml
 
 # get task configs - ONLY THING NEEDED TO CHANGE
-CONFIG_FILE = './config/config_task_librispeech.yaml'
+#CONFIG_FILE = './config/config_task_librispeech.yaml'
+CONFIG_FILE = './config/config_task_jtubespeech_small.yaml'
 
 with open(CONFIG_FILE) as f:
     config = yaml.safe_load(f)
@@ -43,13 +44,13 @@ task.connect(args)
 #task.execute_remotely()
 
 # Or set to run
-task.execute_remotely(queue_name='services', exit_process=True)
+task.execute_remotely(queue_name=config['queue'], exit_process=True)
 
-from preprocessing.generate_manifest import CONFIG_FILE, GenerateManifest
+from preprocessing.generate_manifest import GenerateManifest
 
 # register ClearML Dataset
 dataset = Dataset.create(
-    dataset_project=DATASET_PROJECT, dataset_name=DATASET_NAME, parent_datasets=[args['dataset_task_id'],]
+    dataset_project=DATASET_PROJECT, dataset_name=DATASET_NAME, parent_datasets=[args['dataset_task_id']]
 )
 
 # import dataset
