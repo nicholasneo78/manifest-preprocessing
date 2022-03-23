@@ -1,0 +1,10 @@
+# configuration for the jtubespeech dataset
+
+# the folder to retrieve the jtubespeech dataset (str)
+dataset_folder: './jtubespeech_small_data/'
+
+# the manifest filename and directory to store it (str)
+manifest_filename: './jtubespeech_small_data/manifest.json'
+
+# if annotation is needed in the .json file (bool)
+got_annotation: True

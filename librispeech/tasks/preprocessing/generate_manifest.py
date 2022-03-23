@@ -91,14 +91,17 @@ class GenerateManifest():
 if __name__ == '__main__':
 
     # the directory to the config file with the dataset info that needs to generate the manifest
-    CONFIG_FILE = './config/config_librispeech.yaml'
+    #CONFIG_FILE = './config/config_librispeech.yaml'
+    CONFIG_FILE = './config/config_jtubespeech_small.yaml'
 
 
     with open(CONFIG_FILE) as f:
         config = yaml.safe_load(f)
 
     # instantiate GenerateManifest class object
-    get_manifest = GenerateManifest(root_folder=config['dataset_folder'], manifest_filename=config['manifest_filename'], got_annotation=config['got_annotation'])
+    get_manifest = GenerateManifest(root_folder=config['dataset_folder'], 
+                                    manifest_filename=config['manifest_filename'], 
+                                    got_annotation=config['got_annotation'])
     get_manifest()
 
     print('json manifest file created!')

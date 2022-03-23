@@ -3,8 +3,8 @@
 # the folder to retrieve the librispeech dataset (str)
 dataset_folder: './librispeech_data/'
 
-# the manifest filename (str)
-manifest_filename: 'manifest.json'
+# the manifest filename and directory to store it (str)
+manifest_filename: './librispeech_data/manifest.json'
 
 # if annotation is needed in the .json file (bool)
 got_annotation: True
