@@ -6,7 +6,24 @@ import pandas as pd
 import json
 import librosa
 from pathlib import Path
-import yaml
+import sys
+import argparse
+
+# parsing arguments
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Preprocess data to generate pickle data files from the data manifest",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+
+    # arguments corresponding to the task initialisation
+    parser.add_argument("--dataset_folder",                 type=str, help="the root folder to retrieve the dataset")
+    parser.add_argument("--manifest_filename",              type=str, help="the manifest filename and directory to store it")
+    parser.add_argument("--got_annotation",                 action='store_true', default=False, help="if annotation is needed in the .json file")   
+
+    return parser.parse_args(sys.argv[1:])
+
+arg = parse_args()
 
 # build a class to produce the librispeech data manifest
 class GenerateManifest():
@@ -92,16 +109,16 @@ if __name__ == '__main__':
 
     # the directory to the config file with the dataset info that needs to generate the manifest
     #CONFIG_FILE = './config/config_librispeech.yaml'
-    CONFIG_FILE = './config/config_jtubespeech_small.yaml'
+    # CONFIG_FILE = './config/config_jtubespeech_small.yaml'
 
 
-    with open(CONFIG_FILE) as f:
-        config = yaml.safe_load(f)
+    # with open(CONFIG_FILE) as f:
+    #     config = yaml.safe_load(f)
 
     # instantiate GenerateManifest class object
-    get_manifest = GenerateManifest(root_folder=config['dataset_folder'], 
-                                    manifest_filename=config['manifest_filename'], 
-                                    got_annotation=config['got_annotation'])
+    get_manifest = GenerateManifest(root_folder=arg.dataset_folder, 
+                                    manifest_filename=arg.manifest_filename, 
+                                    got_annotation=arg.got_annotation)
     get_manifest()
 
     print('json manifest file created!')
