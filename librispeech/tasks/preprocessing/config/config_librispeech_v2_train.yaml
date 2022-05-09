@@ -1,0 +1,10 @@
+# configuration for the librispeech dataset
+
+# the folder to retrieve the librispeech dataset (str)
+dataset_folder: './librispeech_v2/train/'
+
+# the manifest filename and directory to store it (str)
+manifest_filename: './librispeech_v2/train/train_manifest.json'
+
+# if annotation is needed in the .json file (bool)
+got_annotation: True
