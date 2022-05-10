@@ -2,15 +2,7 @@ from clearml import Task, Dataset
 import sys
 import argparse
 
-# # get task configs - ONLY THING NEEDED TO CHANGE
-# #CONFIG_FILE = './config/config_task_librispeech.yaml'
-# CONFIG_FILE = './config/config_task_jtubespeech_small.yaml'
-
-# with open(CONFIG_FILE) as f:
-#     config = yaml.safe_load(f)
-
 # parsing arguments
-
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Preprocess data to generate pickle data files from the data manifest",
@@ -51,7 +43,6 @@ task.set_base_docker(
     ]
 )
 
-# librispeech_small dataset_task_id: 092896c34c0e45b598777222d9eaaee6
 args = {
     'dataset_task_id': arg.dataset_task_id,
     'manifest_filename': arg.manifest_filename,
@@ -60,10 +51,7 @@ args = {
 
 task.connect(args)
 
-# EITHER save it in draft first
-# task.execute_remotely()
-
-# Or set to run
+# set to run
 task.execute_remotely(queue_name=arg.queue, exit_process=True)
 
 from preprocessing.generate_manifest import GenerateManifest
@@ -74,11 +62,6 @@ dataset = Dataset.create(
         args['dataset_task_id']]
 )
 
-# import dataset
-#dataset = Dataset.get(dataset_id=args['dataset_task_id'])
-
-# get_mutable_local_copy() is to write into existing file
-# get_local_copy() is to make a copy with the new file
 dataset_path = dataset.get_local_copy()
 
 # process
@@ -90,7 +73,6 @@ librispeech_manifest = GenerateManifest(
 
 new_manifest_path = librispeech_manifest()
 
-# dataset.add_files(dataset_path)
 dataset.add_files(new_manifest_path)
 dataset.upload(output_url=OUTPUT_URL)
 dataset.finalize()

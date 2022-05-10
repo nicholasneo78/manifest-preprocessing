@@ -7,6 +7,6 @@
 !requirements.txt
 /librispeech/tasks/preprocessing/.ipynb_checkpoints
 /librispeech/tasks/preprocessing/librispeech_data/
-/librispeech/tasks/preprocessing/librispeech_v2/
+/librispeech/tasks/preprocessing/librispeech/
 clearml.conf
 .ipynb_checkpoints/*
