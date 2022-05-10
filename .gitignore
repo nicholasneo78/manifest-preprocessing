@@ -7,7 +7,6 @@
 !requirements.txt
 tasks/preprocessing/librispeech_data/*
 tasks/preprocessing/librispeech/*
-tasks/preprocessing/librispeech_copy/*
 tasks/preprocessing/jtubespeech_small_data/*
 tasks/datasets/*
 clearml.conf
