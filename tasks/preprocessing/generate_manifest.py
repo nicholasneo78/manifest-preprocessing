@@ -90,17 +90,17 @@ if __name__ == '__main__':
     get_manifest_train = GenerateManifest(root_folder="./librispeech/train/", 
                                           manifest_filename="./librispeech/train/train_manifest.json", 
                                           got_annotation=True)
-    get_manifest_train()
+    _ = get_manifest_train()
 
     get_manifest_dev = GenerateManifest(root_folder="./librispeech/dev/", 
                                         manifest_filename="./librispeech/dev/dev_manifest.json", 
                                         got_annotation=True)
-    get_manifest_dev()
+    _ = get_manifest_dev()
 
     get_manifest_test = GenerateManifest(root_folder="./librispeech/test/", 
                                          manifest_filename="./librispeech/test/test_manifest.json", 
                                          got_annotation=True)
-    get_manifest_test()
+    _ = get_manifest_test()
 
     print('json manifest file created!')
     

@@ -57,13 +57,6 @@ dataset = Dataset.create(
 
 dataset_path = dataset.get_local_copy()
 
-# # process
-# librispeech_manifest = GenerateManifest(root_folder=dataset_path,
-#                                         manifest_filename=args['manifest_filename'],
-#                                         got_annotation=args['got_annotation']
-#                                         )
-
-# new_manifest_path = librispeech_manifest()
 
 train_manifest = GenerateManifest(root_folder=f'{dataset_path}/train',
                                   manifest_filename=arg.train_manifest_filename,
