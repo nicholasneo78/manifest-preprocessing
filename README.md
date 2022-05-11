@@ -33,3 +33,17 @@ The repository structure will be as shown below:
     └── task_generate_manifest.py
 
 ```
+
+# Executing code on local machine
+**The documentations below are for running the code using local machine, please go to the section on [Executing code on ClearML](#executing-code-on-clearml) if you want to run your code on ClearML**    
+
+
+# Executing code on ClearML
+**The documentations below are for running the code using ClearML, please go to the section on [Executing code on local machine](#executing-code-on-local-machine) if you want to run your code locally**  
+  
+  
+### Getting Started - Install ClearML and boto3
+To install ClearML and boto3, simply do a pip install in your environment:  
+```shell
+pip install clearml boto3
+```
