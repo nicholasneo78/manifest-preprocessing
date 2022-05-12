@@ -28,7 +28,6 @@ The repository structure will be as shown below:
     |   ├── <PUT YOUR DATASET FOLDERS HERE> 
     │   └── generate_manifest.py
     ├── scripts
-    │   ├── task_jtubespeech_small.sh
     │   └── task_librispeech.sh
     └── task_generate_manifest.py
 ```
@@ -145,7 +144,7 @@ The train, dev and test manifest files will be produced in the s3 bucket and sho
 Before executing the code, create a script identical to the example given on `generate-manifest/tasks/scripts/task_librispeech.sh` but with your own inputs. Here is a code snippet to illustrate the executed task:    
 ```shell
 python3 ../task_generate_manifest.py \
-    --docker_image "nicholasneo78/manifest_preprocessing:v0.1.0"
+    --docker_image "nicholasneo78/manifest_preprocessing:latest"
     --project_name "<YOUR_PROJECT_NAME>" \
     --task_name "<YOUR_TASK_NAME>" \
     --dataset_name "<YOUR_DATASET_NAME>" \
