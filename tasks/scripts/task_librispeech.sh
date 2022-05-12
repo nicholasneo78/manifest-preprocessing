@@ -3,7 +3,7 @@
 python3 ../task_generate_manifest.py \
     --docker_image "nicholasneo78/manifest_preprocessing:latest" \
     --project_name "audio_preproc_test" \
-    --task_name "librispeech_manifest_generationn" \
+    --task_name "librispeech_manifest_generation" \
     --dataset_name "librispeech" \
     --output_url "s3://experiment-logging" \
     --dataset_project "datasets/librispeech" \
