@@ -49,9 +49,6 @@ dataset = Dataset.create(
     parent_datasets=[arg.dataset_task_id]
 )
 
-# add the pre-existing dataset
-dataset.add_external_files()
-
 dataset_path = dataset.get_local_copy()
 
 
