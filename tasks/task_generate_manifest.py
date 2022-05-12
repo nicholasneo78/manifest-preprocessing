@@ -46,23 +46,22 @@ from preprocessing.generate_manifest import GenerateManifest
 dataset = Dataset.create(
     dataset_project=arg.dataset_project, 
     dataset_name=arg.dataset_name, 
-    parent_datasets=[arg.dataset_task_id],
-    use_current_task=True
+    parent_datasets=[arg.dataset_task_id]
 )
 
 dataset_path = dataset.get_local_copy()
 
 
 train_manifest = GenerateManifest(root_folder=f'{dataset_path}/train',
-                                  manifest_filename=f'{dataset_path}/train/{arg.train_manifest_filename}',
+                                  manifest_filename=f'{dataset_path}/{arg.train_manifest_filename}',
                                   got_annotation=arg.got_annotation)
 
 dev_manifest = GenerateManifest(root_folder=f'{dataset_path}/dev',
-                                manifest_filename=f'{dataset_path}/dev/{arg.dev_manifest_filename}',
+                                manifest_filename=f'{dataset_path}/{arg.dev_manifest_filename}',
                                 got_annotation=arg.got_annotation)
                                 
 test_manifest = GenerateManifest(root_folder=f'{dataset_path}/test',
-                                 manifest_filename=f'{dataset_path}/test/{arg.test_manifest_filename}',
+                                 manifest_filename=f'{dataset_path}/{arg.test_manifest_filename}',
                                  got_annotation=arg.got_annotation)
 
 train_manifest_path = train_manifest()
