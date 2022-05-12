@@ -58,7 +58,7 @@ docker-compose up --build -d
 ```shell
 docker images
 ```
-You should see the image `manifest-preprocessing` with the tag `v0.1.0` in the list of docker images.  
+You should see the image `manifest-preprocessing` with the tag `latest` in the list of docker images.  
 
 ### Entering the docker image
 1. To enter into the docker image to execute codes in the pipeline, execute this command
