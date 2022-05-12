@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=jupyter/minimal-notebook
+ARG BASE_CONTAINER=python:3.8.13-slim-buster
 FROM $BASE_CONTAINER
 
 USER root
@@ -18,7 +18,7 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update \
 && apt-get upgrade -y \
 && apt-get install -y \
-&& apt-get -y install apt-utils gcc libpq-dev libsndfile1 ffmpeg
+&& apt-get -y install apt-utils gcc libpq-dev libsndfile1 ffmpeg python3-pandas
 
 #Installing dependencies
 RUN pip install -r requirements.txt
