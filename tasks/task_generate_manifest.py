@@ -49,26 +49,29 @@ dataset = Dataset.create(
     parent_datasets=[arg.dataset_task_id]
 )
 
+# add the pre-existing dataset
+dataset.add_external_files()
+
 dataset_path = dataset.get_local_copy()
 
 
 train_manifest = GenerateManifest(root_folder=f'{dataset_path}/train',
-                                  manifest_filename=f'{dataset_path}/{arg.train_manifest_filename}',
+                                  manifest_filename=f'{arg.train_manifest_filename}',
                                   got_annotation=arg.got_annotation)
 
 dev_manifest = GenerateManifest(root_folder=f'{dataset_path}/dev',
-                                manifest_filename=f'{dataset_path}/{arg.dev_manifest_filename}',
+                                manifest_filename=f'{arg.dev_manifest_filename}',
                                 got_annotation=arg.got_annotation)
                                 
 test_manifest = GenerateManifest(root_folder=f'{dataset_path}/test',
-                                 manifest_filename=f'{dataset_path}/{arg.test_manifest_filename}',
+                                 manifest_filename=f'{arg.test_manifest_filename}',
                                  got_annotation=arg.got_annotation)
 
 train_manifest_path = train_manifest()
 dev_manifest_path = dev_manifest()
 test_manifest_path = test_manifest()
 
-# dataset.add_files(new_manifest_path)
+dataset.add_files(dataset_path)
 dataset.add_files(train_manifest_path)
 dataset.add_files(dev_manifest_path)
 dataset.add_files(test_manifest_path)
