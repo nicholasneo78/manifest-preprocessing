@@ -43,6 +43,10 @@ task.execute_remotely(queue_name=arg.queue, exit_process=True)
 from preprocessing.generate_manifest import GenerateManifest
 
 # register ClearML Dataset
+data_no_manifest = Dataset.get(dataset_id=arg.dataset_task_id)
+data_no_manifest_path = data_no_manifest.get_local_copy()
+
+# create a new dataset
 dataset = Dataset.create(
     dataset_project=arg.dataset_project, 
     dataset_name=arg.dataset_name, 
@@ -68,7 +72,7 @@ train_manifest_path = train_manifest()
 dev_manifest_path = dev_manifest()
 test_manifest_path = test_manifest()
 
-dataset.add_files(dataset_path)
+dataset.add_files(data_no_manifest_path)
 dataset.add_files(train_manifest_path)
 dataset.add_files(dev_manifest_path)
 dataset.add_files(test_manifest_path)
