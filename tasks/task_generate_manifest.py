@@ -10,6 +10,7 @@ def parse_args():
     )
 
     # arguments corresponding to the task initialisation
+    parser.add_argument("--docker_image",               type=str, help="the docker image used to load all the dependencies")
     parser.add_argument("--project_name",               type=str, help="the clearml project name")
     parser.add_argument("--task_name",                  type=str, help="clearml task name")
     parser.add_argument("--dataset_name",               type=str, help="name of the output dataset produced")
@@ -33,14 +34,7 @@ task = Task.init(project_name=arg.project_name,
                  output_uri=arg.output_url)
 
 task.set_base_docker(
-    docker_image="python:3.8.12-slim-buster",
-    docker_setup_bash_script=[
-        'apt-get update', 'apt-get upgrade -y', 'apt-get install -y'
-        'apt-get -y install apt-utils gcc libpq-dev ffmpeg python3-pandas',
-        'apt-get -y install libsndfile1',
-        'apt-get -y install python3-pandas',
-        'python3 -m pip install pandas librosa numpy==1.21.0'
-    ]
+    docker_image=arg.docker_image
 )
 
 # set to run
@@ -52,22 +46,23 @@ from preprocessing.generate_manifest import GenerateManifest
 dataset = Dataset.create(
     dataset_project=arg.dataset_project, 
     dataset_name=arg.dataset_name, 
-    parent_datasets=[arg.dataset_task_id]
+    parent_datasets=[arg.dataset_task_id],
+    use_current_task=True
 )
 
 dataset_path = dataset.get_local_copy()
 
 
 train_manifest = GenerateManifest(root_folder=f'{dataset_path}/train',
-                                  manifest_filename=arg.train_manifest_filename,
+                                  manifest_filename=f'{dataset_path}/train/{arg.train_manifest_filename}',
                                   got_annotation=arg.got_annotation)
 
 dev_manifest = GenerateManifest(root_folder=f'{dataset_path}/dev',
-                                manifest_filename=arg.dev_manifest_filename,
+                                manifest_filename=f'{dataset_path}/dev/{arg.dev_manifest_filename}',
                                 got_annotation=arg.got_annotation)
                                 
 test_manifest = GenerateManifest(root_folder=f'{dataset_path}/test',
-                                 manifest_filename=arg.test_manifest_filename,
+                                 manifest_filename=f'{dataset_path}/test/{arg.test_manifest_filename}',
                                  got_annotation=arg.got_annotation)
 
 train_manifest_path = train_manifest()
