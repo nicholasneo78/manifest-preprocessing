@@ -13,7 +13,7 @@ The tasks is as follow:
 1. Generation Manifest - [Local](#generate-manifest-on-local-machine) | [ClearML](#generate-manifest-on-clearml)   
   
 ## Project Organization 
-There are some folders that needs to be created by the user to store the datasets (audio and annotations). **The instructions will be shown below in the repository structure on what needs to be created by the user.**   
+There are some folders that needs to be created by the user to store the datasets (audio and annotations). **The instructions will be shown below in the repository structure on what needs to be created by the user.** In this repository, librispeech data will be used as an example. You can get the librispeech dataset from [here](https://www.openslr.org/12).  
 
 The repository structure will be as shown below:  
 ```
