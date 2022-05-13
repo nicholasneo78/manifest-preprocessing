@@ -53,15 +53,15 @@ dataset_path = dataset.get_local_copy()
 
 
 train_manifest = GenerateManifest(root_folder=f'{dataset_path}/train',
-                                  manifest_filename=f'{arg.train_manifest_filename}',
+                                  manifest_filename=f'train/{arg.train_manifest_filename}',
                                   got_annotation=arg.got_annotation)
 
 dev_manifest = GenerateManifest(root_folder=f'{dataset_path}/dev',
-                                manifest_filename=f'{arg.dev_manifest_filename}',
+                                manifest_filename=f'dev/{arg.dev_manifest_filename}',
                                 got_annotation=arg.got_annotation)
                                 
 test_manifest = GenerateManifest(root_folder=f'{dataset_path}/test',
-                                 manifest_filename=f'{arg.test_manifest_filename}',
+                                 manifest_filename=f'test/{arg.test_manifest_filename}',
                                  got_annotation=arg.got_annotation)
 
 train_manifest_path = train_manifest()
