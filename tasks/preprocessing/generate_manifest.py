@@ -10,10 +10,11 @@ from pathlib import Path
 # build a class to produce the librispeech data manifest
 class GenerateManifest:
     
-    def __init__(self, root_folder, manifest_filename, got_annotation):
+    def __init__(self, root_folder, manifest_filename, got_annotation, audio_ext):
         self.root_folder = root_folder
         self.manifest_filename = manifest_filename
         self.got_annotation = got_annotation
+        self.audio_ext = audio_ext
     
     # check if the json file name already existed (if existed, need to throw error or else the new json manifest will be appended to the old one, hence causing a file corruption)
     def json_existence(self):
@@ -58,7 +59,7 @@ class GenerateManifest:
             modified_root = modified_root_.replace('/', '', 1)
 
             for file in files:
-                if file.endswith(".flac"):
+                if file.endswith(self.audio_ext):
                     # retrieve the base path for the particular audio file
                     base_path = os.path.basename(os.path.join(root, file)).split('.')[0]
 
@@ -86,21 +87,29 @@ class GenerateManifest:
 
 if __name__ == '__main__':
 
-    # instantiate GenerateManifest class object
-    get_manifest_train = GenerateManifest(root_folder="./librispeech/train/", 
-                                          manifest_filename="./librispeech/train/train_manifest.json", 
-                                          got_annotation=True)
-    _ = get_manifest_train()
+    # # instantiate GenerateManifest class object
+    # get_manifest_train = GenerateManifest(root_folder="./librispeech/train/", 
+    #                                       manifest_filename="./librispeech/train/train_manifest.json", 
+    #                                       got_annotation=True)
+    # _ = get_manifest_train()
 
-    get_manifest_dev = GenerateManifest(root_folder="./librispeech/dev/", 
-                                        manifest_filename="./librispeech/dev/dev_manifest.json", 
-                                        got_annotation=True)
-    _ = get_manifest_dev()
+    # get_manifest_dev = GenerateManifest(root_folder="./librispeech/dev/", 
+    #                                     manifest_filename="./librispeech/dev/dev_manifest.json", 
+    #                                     got_annotation=True)
+    # _ = get_manifest_dev()
 
-    get_manifest_test = GenerateManifest(root_folder="./librispeech/test/", 
-                                         manifest_filename="./librispeech/test/test_manifest.json", 
-                                         got_annotation=True)
-    _ = get_manifest_test()
+    # get_manifest_test = GenerateManifest(root_folder="./librispeech/test/", 
+    #                                      manifest_filename="./librispeech/test/test_manifest.json", 
+    #                                      got_annotation=True)
+    # _ = get_manifest_test()
+
+    # try out for one of the mms data folder
+    get_manifest = GenerateManifest(root_folder="./CH 10/", 
+                                    manifest_filename="./CH 10/manifest.json", 
+                                    got_annotation=False,
+                                    audio_ext='.wav')
+
+    _ = get_manifest()
 
     print('json manifest file created!')
     
