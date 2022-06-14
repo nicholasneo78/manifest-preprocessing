@@ -50,9 +50,10 @@ class GenerateManifest:
             # get the lookup table
             df_new = self.build_lookup_table()
 
+        error_count = 0
+
         # retrieve the dataframe lookup table
         for root, subdirs, files in os.walk(self.root_folder):
-            
             # since self.root_folder is a subset of the root, can just replace self.root with empty string
             modified_root_ = str(Path(root)).replace(str(Path(self.root_folder)), '')
             # replace the slash with empty string after Path standardization
@@ -60,26 +61,37 @@ class GenerateManifest:
 
             for file in files:
                 if file.endswith(self.audio_ext):
-                    # retrieve the base path for the particular audio file
-                    base_path = os.path.basename(os.path.join(root, file)).split('.')[0]
+                    try:
+                        # retrieve the base path for the particular audio file
+                        base_path = os.path.basename(os.path.join(root, file)).split('.')[0]
 
-                    # create the dictionary that is to be appended to the json file
-                    if self.got_annotation:
-                        data = {
-                                'audio_filepath' : os.path.join(modified_root, file),
-                                'duration' : librosa.get_duration(filename=os.path.join(root, file)),
-                                'text' : df_new.loc[df_new['id'] == base_path, 'annotations'].to_numpy()[0]
-                               }
-                    else:
-                        data = {
-                                'audio_filepath' : os.path.join(modified_root, file),
-                                'duration' : librosa.get_duration(filename=os.path.join(root, file)),
-                               }
+                        # create the dictionary that is to be appended to the json file
+                        if self.got_annotation:
+                            data = {
+                                    # 'audio_filepath' : os.path.join(modified_root, file),
+                                    'audio_filepath' : os.path.join(root, file),
+                                    'duration' : librosa.get_duration(filename=os.path.join(root, file)),
+                                    'text' : df_new.loc[df_new['id'] == base_path, 'annotations'].to_numpy()[0]
+                                }
+                        else:
+                            data = {
+                                    # 'audio_filepath' : os.path.join(modified_root, file),
+                                    'audio_filepath' : os.path.join(root, file),
+                                    'duration' : librosa.get_duration(filename=os.path.join(root, file)),
+                                    'text': ""
+                                }
 
-                    # write to json file
-                    with open(f'{self.manifest_filename}', 'a+', encoding='utf-8') as f:
-                        f.write(json.dumps(data) + '\n')
-
+                        # write to json file
+                        with open(f'{self.manifest_filename}', 'a+', encoding='utf-8') as f:
+                            f.write(json.dumps(data) + '\n')
+            
+                    # for corrupted file of the target extension                
+                    except:
+                        error_count+=1
+                        print(f"Error loading {file}")
+                        continue
+        
+        print(f'Total number of errors: {error_count}')
         return f'{self.manifest_filename}'
 
     def __call__(self):
@@ -104,8 +116,8 @@ if __name__ == '__main__':
     # _ = get_manifest_test()
 
     # try out for one of the mms data folder
-    get_manifest = GenerateManifest(root_folder="./CH 10/", 
-                                    manifest_filename="./CH 10/manifest.json", 
+    get_manifest = GenerateManifest(root_folder="mms_20220404/", 
+                                    manifest_filename="manifest.json", 
                                     got_annotation=False,
                                     audio_ext='.wav')
 
