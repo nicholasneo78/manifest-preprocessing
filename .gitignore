@@ -5,9 +5,7 @@
 *.wav
 *.txt
 !requirements.txt
-tasks/preprocessing/librispeech_data/*
-tasks/preprocessing/librispeech/*
-tasks/preprocessing/jtubespeech_small_data/*
+tasks/preprocessing/datasets/*
 tasks/datasets/*
 clearml.conf
 .ipynb_checkpoints/*

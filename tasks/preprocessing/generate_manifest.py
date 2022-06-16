@@ -68,15 +68,15 @@ class GenerateManifest:
                         # create the dictionary that is to be appended to the json file
                         if self.got_annotation:
                             data = {
-                                    # 'audio_filepath' : os.path.join(modified_root, file),
-                                    'audio_filepath' : os.path.join(root, file),
+                                    'audio_filepath' : os.path.join(modified_root, file),
+                                    # 'audio_filepath' : os.path.join(root, file),
                                     'duration' : librosa.get_duration(filename=os.path.join(root, file)),
                                     'text' : df_new.loc[df_new['id'] == base_path, 'annotations'].to_numpy()[0]
                                 }
                         else:
                             data = {
-                                    # 'audio_filepath' : os.path.join(modified_root, file),
-                                    'audio_filepath' : os.path.join(root, file),
+                                    'audio_filepath' : os.path.join(modified_root, file),
+                                    # 'audio_filepath' : os.path.join(root, file),
                                     'duration' : librosa.get_duration(filename=os.path.join(root, file)),
                                     'text': ""
                                 }
@@ -116,12 +116,11 @@ if __name__ == '__main__':
     # _ = get_manifest_test()
 
     # try out for one of the mms data folder
-    get_manifest = GenerateManifest(root_folder="mms_20220404/", 
-                                    manifest_filename="manifest.json", 
+    get_manifest = GenerateManifest(root_folder="mms/mms_20220404/CH 16/", 
+                                    manifest_filename="mms/mms_20220404/CH 16/manifest.json", 
                                     got_annotation=False,
                                     audio_ext='.wav')
 
     _ = get_manifest()
 
     print('json manifest file created!')
-    
