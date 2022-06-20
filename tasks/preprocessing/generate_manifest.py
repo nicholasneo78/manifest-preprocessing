@@ -116,11 +116,18 @@ if __name__ == '__main__':
     # _ = get_manifest_test()
 
     # try out for one of the mms data folder
-    get_manifest = GenerateManifest(root_folder="mms/mms_20220404/CH 16/", 
-                                    manifest_filename="mms/mms_20220404/CH 16/manifest.json", 
-                                    got_annotation=False,
-                                    audio_ext='.wav')
 
-    _ = get_manifest()
+    channel_list = [10, 14, 16, 73]
+    mms_date_list = ['20220404','20220417','20220430','20220501','20220520','20220529','20220610']
 
-    print('json manifest file created!')
+    for mms_date in mms_date_list:
+        for channel in channel_list:
+
+            get_manifest = GenerateManifest(root_folder=f"datasets/mms_batch_1/mms_{mms_date}/CH {channel}/", 
+                                            manifest_filename=f"datasets/mms_batch_1/mms_{mms_date}/CH {channel}/manifest.json", 
+                                            got_annotation=False,
+                                            audio_ext='.wav')
+
+            _ = get_manifest()
+
+            print(f'{mms_date} {channel}: json manifest file created!')
