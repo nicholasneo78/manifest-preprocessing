@@ -117,17 +117,19 @@ if __name__ == '__main__':
 
     # try out for one of the mms data folder
 
-    channel_list = [10, 14, 16, 73]
-    mms_date_list = ['20220404','20220417','20220430','20220501','20220520','20220529','20220610']
+    batch = 'mms_batch_0'
+    root_dir = f'datasets/{batch}'
+    batch_date_list = [d for d in os.listdir(root_dir)]
+    channel_list = ['CH 10', 'CH 14', 'CH 16', 'CH 73']
 
-    for mms_date in mms_date_list:
+    for mms_date in batch_date_list:
         for channel in channel_list:
 
-            get_manifest = GenerateManifest(root_folder=f"datasets/mms_batch_1/mms_{mms_date}/CH {channel}/", 
-                                            manifest_filename=f"datasets/mms_batch_1/mms_{mms_date}/CH {channel}/manifest.json", 
+            get_manifest = GenerateManifest(root_folder=f"datasets/{batch}/{mms_date}/{channel}/", 
+                                            manifest_filename=f"datasets/{batch}/{mms_date}/{channel}/manifest.json", 
                                             got_annotation=False,
                                             audio_ext='.wav')
 
             _ = get_manifest()
 
-            print(f'{mms_date} {channel}: json manifest file created!')
+            print(f'{mms_date} - {channel}: json manifest file created!')
