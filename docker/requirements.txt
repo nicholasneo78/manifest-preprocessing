@@ -1,6 +1,6 @@
 pandas 
 librosa 
-numpy==1.21.0
+numpy==1.22.0
 
 # soundfile==0.10.3.post1
 # librosa==0.8.1
